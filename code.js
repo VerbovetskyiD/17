@@ -1,5 +1,5 @@
 class List {
-    storage = this._getList();
+    storage = this.getList();
 
     constructor(listName) {
         this.name = listName;
@@ -11,28 +11,28 @@ class List {
             text,
         };
         this.storage.push(data);
-        this._toLocalStorage();
+        this.toLocalStorage();
     }
 
     delete(id) {
-        this.storage.splice(this._getIndex(id), 1);
-        this._toLocalStorage();
+        this.storage.splice(this.getIndex(id), 1);
+        this.toLocalStorage();
     }
 
     edit(id, newText) {
-        this.storage[this._getIndex(id)].text = newText;
-        this._toLocalStorage();
+        this.storage[this.getIndex(id)].text = newText;
+        this.toLocalStorage();
     }
 
-    _getIndex(id) {
+    getIndex(id) {
         return this.storage.findIndex(data => data.id === id);
     }
 
-    _getList() {
+    getList() {
         return JSON.parse(localStorage.getItem('data')) || [];
     }
 
-    _toLocalStorage() {
+    toLocalStorage() {
         const data = JSON.stringify(this.storage);
         localStorage.setItem('data', data);
     }
@@ -50,12 +50,12 @@ class ToDoList extends List {
             status: false,
         };
         this.storage.push(task);
-        this._toLocalStorage();
+        this.toLocalStorage();
     }
 
     complete(taskId) {
-        this.storage[this._getIndex(taskId)].status = true;
-        this._toLocalStorage();
+        this.storage[this.getIndex(taskId)].status = true;
+        this.toLocalStorage();
     }
 
     stat(i = 0, j = 0) {
@@ -63,11 +63,11 @@ class ToDoList extends List {
         return `completed - ${i}, uncompleted - ${j}`;
     }
 
-    _getList() {
+    getList() {
         return JSON.parse(localStorage.getItem('task')) || [];
     }
 
-    _toLocalStorage() {
+    toLocalStorage() {
         const task = JSON.stringify(this.storage);
         localStorage.setItem('task', task);
     }
@@ -85,15 +85,15 @@ class ContactList extends List {
             number: contactNumber,
         };
         this.storage.push(contact);
-        this._toLocalStorage();
+        this.toLocalStorage();
     }
 
     edit(id, newContactName, newContactSurname, newContactNumber) {
         this.storage[
-            this._getIndex(id)
+            this.getIndex(id)
             ].contact = `${newContactName} ${newContactSurname}`;
-        this.storage[this._getIndex(id)].number = newContactNumber;
-        this._toLocalStorage();
+        this.storage[this.getIndex(id)].number = newContactNumber;
+        this.toLocalStorage();
     }
 
     search(searchValue) {
@@ -104,11 +104,11 @@ class ContactList extends List {
         );
     }
 
-    _getList() {
+    getList() {
         return JSON.parse(localStorage.getItem('contact')) || [];
     }
 
-    _toLocalStorage() {
+    toLocalStorage() {
         const contact = JSON.stringify(this.storage);
         localStorage.setItem('contact', contact);
     }

@@ -29,12 +29,12 @@ class List {
     }
 
     getList() {
-        return JSON.parse(localStorage.getItem('data')) || [];
+        return JSON.parse(localStorage.getItem(this.name)) || [];
     }
 
     toLocalStorage() {
         const data = JSON.stringify(this.storage);
-        localStorage.setItem('data', data);
+        localStorage.setItem(this.name, data);
     }
 }
 
@@ -61,15 +61,6 @@ class ToDoList extends List {
     stat(i = 0, j = 0) {
         this.storage.forEach(note => (note.status ? ++i : ++j));
         return `completed - ${i}, uncompleted - ${j}`;
-    }
-
-    getList() {
-        return JSON.parse(localStorage.getItem('task')) || [];
-    }
-
-    toLocalStorage() {
-        const task = JSON.stringify(this.storage);
-        localStorage.setItem('task', task);
     }
 }
 
@@ -103,17 +94,9 @@ class ContactList extends List {
                 contact.number.toString().includes(searchValue)
         );
     }
-
-    getList() {
-        return JSON.parse(localStorage.getItem('contact')) || [];
-    }
-
-    toLocalStorage() {
-        const contact = JSON.stringify(this.storage);
-        localStorage.setItem('contact', contact);
-    }
 }
 
+// проверка
 const toDoList = new ToDoList('To do list');
 toDoList.add();
 toDoList.delete();

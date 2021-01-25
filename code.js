@@ -1,8 +1,8 @@
 class List {
-    storage = this.getList();
 
     constructor(listName) {
         this.name = listName;
+        this.storage = this.getList();
     }
 
     add(text) {
@@ -33,13 +33,11 @@ class List {
     }
 
     toLocalStorage() {
-        const data = JSON.stringify(this.storage);
-        localStorage.setItem(this.name, data);
+        localStorage.setItem(this.name, JSON.stringify(this.storage));
     }
 }
 
 class ToDoList extends List {
-
     add(text) {
         const task = {
             id: Date.now(),
@@ -62,7 +60,6 @@ class ToDoList extends List {
 }
 
 class ContactList extends List {
-
     add(contactName, contactSurname, contactNumber) {
         const contact = {
             id: Date.now(),

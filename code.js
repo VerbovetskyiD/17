@@ -39,9 +39,6 @@ class List {
 }
 
 class ToDoList extends List {
-    constructor(name) {
-        super(name);
-    }
 
     add(text) {
         const task = {
@@ -65,9 +62,6 @@ class ToDoList extends List {
 }
 
 class ContactList extends List {
-    constructor(name) {
-        super(name);
-    }
 
     add(contactName, contactSurname, contactNumber) {
         const contact = {
